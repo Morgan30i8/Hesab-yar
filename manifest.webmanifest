@@ -1,0 +1,19 @@
+{
+  "name": "حساب‌یار | حسابداری شخصی",
+  "short_name": "حساب‌یار",
+  "description": "حسابداری شخصی و ایجنت محلی، رایگان و خصوصی",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#09111f",
+  "theme_color": "#09111f",
+  "lang": "fa",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

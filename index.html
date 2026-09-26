@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#09111f">
+  <meta name="description" content="حساب‌یار؛ حسابداری شخصی و ایجنت محلی، رایگان و خصوصی">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%237cf2c4'/%3E%3Cpath d='M18 20h28v8H18zm0 16h19v8H18z' fill='%2309111f'/%3E%3Ccircle cx='47' cy='40' r='6' fill='%2309111f'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <title>حساب‌یار | حسابداری شخصی</title>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand-lockup">
+        <div class="brand-mark" aria-hidden="true">₿</div>
+        <div>
+          <div class="brand-name">حساب‌یار</div>
+          <div class="brand-subtitle"><span class="online-dot"></span> خصوصی و آفلاین</div>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button class="icon-button" id="installButton" title="نصب روی گوشی" hidden>⇩</button>
+        <button class="icon-button" id="backupButton" title="پشتیبان‌گیری">↥</button>
+        <button class="icon-button" id="csvButton" title="خروجی اکسل CSV">≋</button>
+        <label class="icon-button file-button" title="بازیابی پشتیبان">↥<input id="restoreInput" type="file" accept="application/json" hidden></label>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero-row">
+        <div>
+          <p class="eyebrow">داشبورد مالی</p>
+          <h1>کنترل پول، <span>بدون دردسر.</span></h1>
+          <p class="hero-copy">درآمد و هزینه‌هایت را ثبت کن؛ حساب‌یار خودش جمع‌بندی و تحلیل می‌کند.</p>
+        </div>
+        <label class="month-picker">
+          <span>دوره گزارش</span>
+          <input id="monthFilter" type="month">
+        </label>
+      </section>
+
+      <section class="summary-grid" aria-label="خلاصه حساب">
+        <article class="summary-card balance-card">
+          <div class="card-label"><span class="card-icon">◈</span> مانده این دوره</div>
+          <strong id="balanceValue">۰ تومان</strong>
+          <small id="balanceCaption">بعد از ثبت اولین تراکنش نمایش داده می‌شود</small>
+        </article>
+        <article class="summary-card income-card">
+          <div class="card-label"><span class="card-icon">↗</span> درآمد</div>
+          <strong id="incomeValue">۰ تومان</strong>
+          <small>واریزی‌های دوره انتخاب‌شده</small>
+        </article>
+        <article class="summary-card expense-card">
+          <div class="card-label"><span class="card-icon">↘</span> هزینه</div>
+          <strong id="expenseValue">۰ تومان</strong>
+          <small>برداشت‌های دوره انتخاب‌شده</small>
+        </article>
+      </section>
+
+      <section class="workspace-grid">
+        <div class="main-column">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">دفتر روزانه</p>
+              <h2>تراکنش‌ها</h2>
+            </div>
+            <button class="primary-button compact" id="addButton">+ ثبت تراکنش</button>
+          </div>
+          <div class="filters" role="tablist" aria-label="فیلتر تراکنش‌ها">
+            <button class="filter-button active" data-filter="all">همه</button>
+            <button class="filter-button" data-filter="income">درآمدها</button>
+            <button class="filter-button" data-filter="expense">هزینه‌ها</button>
+          </div>
+          <div id="transactionsList" class="transactions-list"></div>
+        </div>
+
+        <aside class="agent-card">
+          <div class="agent-heading">
+            <div class="agent-avatar">✦</div>
+            <div>
+              <div class="agent-title">ایجنت حساب‌یار</div>
+              <div class="agent-status"><span class="online-dot"></span> آماده‌ی کمک</div>
+            </div>
+            <span class="local-badge">LOCAL</span>
+          </div>
+          <div id="chatMessages" class="chat-messages" aria-live="polite">
+            <div class="chat-bubble agent-bubble">سلام! من حساب‌یارم. می‌توانم تراکنش ثبت کنم یا وضعیت مالی‌ات را خلاصه کنم.</div>
+          </div>
+          <div class="suggestion-row">
+            <button class="suggestion" data-prompt="گزارش این ماه">گزارش این ماه</button>
+            <button class="suggestion" data-prompt="آخرین هزینه‌ها">آخرین هزینه‌ها</button>
+          </div>
+          <form id="chatForm" class="chat-form">
+            <input id="chatInput" autocomplete="off" placeholder="مثلاً: ۸۰ هزار برای قهوه خرج کردم" aria-label="پیام به ایجنت">
+            <button class="send-button" type="submit" aria-label="ارسال">↑</button>
+          </form>
+          <p class="agent-note">بدون ارسال اطلاعات به اینترنت؛ تحلیل با منطق داخلی انجام می‌شود.</p>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="footer-note">حساب‌یار برای استفاده شخصی ساخته شده است. قبل از حذف داده‌های مرورگر، از پشتیبان‌گیری استفاده کن.</footer>
+  </div>
+
+  <dialog id="transactionDialog" class="transaction-dialog">
+    <form method="dialog" id="transactionForm">
+      <div class="dialog-header"><div><p class="eyebrow">دفتر روزانه</p><h2>ثبت تراکنش</h2></div><button class="close-button" value="cancel" aria-label="بستن">×</button></div>
+      <div class="type-toggle"><button type="button" class="type-button active" data-type="expense">هزینه</button><button type="button" class="type-button" data-type="income">درآمد</button></div>
+      <label class="field-label">مبلغ (تومان)<input id="amountInput" inputmode="decimal" required placeholder="مثلاً ۸۰۰۰۰"></label>
+      <label class="field-label">عنوان<input id="titleInput" required placeholder="مثلاً خرید روزانه"></label>
+      <div class="field-row"><label class="field-label">دسته‌بندی<select id="categoryInput"><option>خوراک</option><option>حمل‌ونقل</option><option>قبض و خانه</option><option>خرید</option><option>سلامت</option><option>تفریح</option><option>حقوق</option><option>فروش</option><option>سایر</option></select></label><label class="field-label">تاریخ<input id="dateInput" type="date" required></label></div>
+      <button class="primary-button dialog-submit" value="default">ثبت در دفتر</button>
+    </form>
+  </dialog>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
